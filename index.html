@@ -1,10 +1,41 @@
 <!DOCTYPE html>
 <title>Upstream Press</title>
-<style> @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap');</style>
 <style>
-	body { margin:55px auto; background-color: hsl(180,11%,95%); font-family:"IBM Plex Sans"; text-align:center; letter-spacing:4px;}
-	body:not(.loaded) > * { opacity:0; }
+	body:not(.rendered) > * { opacity:0; }
+	body:not(.rendered) { color:hsl(0,0%,22%); background:hsl(0,0%,22%); }
+	body {transition: background-color 333ms ease-out;}
+	</style>
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap');
+	body { margin:55px auto; font-family:"IBM Plex Sans"; text-align:center; letter-spacing:4px;}
+	body { color:hsl(0,0%,0%); background-color: hsl(180,11%,95%); }
 </style>
-<body onload="document.body.classList.add('loaded'); document.body.innerHTML += '<br>'+performance.now()">
+<body>
 <div>UPSTREAM PRESS</div>
 </body>
+<script>
+
+document.addEventListener("DOMContentLoaded", function(event){
+	document.body.classList.add('object-model-ready')
+	console.info("object-model-ready", performance.now())
+	window.initialRender.delay(1)
+})
+
+document.fonts.ready.then(function(){
+	document.body.classList.add('fonts-ready')
+	console.info("fonts-ready", performance.now())
+	window.initialRender.delay(1)
+})
+
+window.initialRender = function(){
+	if (document.body.classList.contains('rendered')) return
+	if (document.body.classList.contains('object-model-ready') === false) return
+	if (document.body.classList.contains('fonts-ready') === false) return
+	document.body.innerHTML += '<br>'+performance.now()
+	document.body.classList.add('rendered')
+	console.info("initialRender", performance.now())
+}
+	
+Function.prototype.delay = function(amount) { setTimeout(this, amount) }
+	
+</script>
