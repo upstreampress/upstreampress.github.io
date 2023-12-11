@@ -1,5 +1,8 @@
 User-agent: archive.org_bot
 Disallow:
 
+User-agent: DuckDuck
+Disallow:
+
 User-agent: *
 Disallow: /
