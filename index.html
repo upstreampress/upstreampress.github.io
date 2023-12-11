@@ -2,8 +2,12 @@
 <title>Upstream Press</title>
 <style> @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=block');</style>
 <style>
-body { margin:55px auto; background-color: hsl(180,11%,95%); font-family:"IBM Plex Sans"; text-align:center; letter-spacing:4px;}
+	body { margin:55px auto; background-color: hsl(180,11%,95%); font-family:"IBM Plex Sans"; text-align:center; letter-spacing:4px;}
 </style>
-<body>
+<body onload="document.body.innerText += 'Opened '+window.opened+' - Loaded '+performance.now()">
 UPSTREAM PRESS
+<br>
 </body>
+<script>
+	window.opened = performance.now()
+</script>
